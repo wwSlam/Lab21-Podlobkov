@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-List<string> tasks = new List<string> { "Код", "Тест","Код"};
-System.Console.WriteLine(tasks.Count);
+// List<string> tasks = new List<string> { "Код", "Тест","Код"};
+// System.Console.WriteLine(tasks.Count);
 
-tasks.Add("Отчёт");
-tasks.Insert(1, "План");
+// tasks.Add("Отчёт");
+// tasks.Insert(1, "План");
 
 bool InsertTaskSafe(List<string> tasks, int index, string title)
 {
@@ -36,7 +36,7 @@ void PrintTasks(List<string> tasks)
     }
 }
 
-PrintTasks(tasks);
+// PrintTasks(tasks);
 
 
 // List<string> removedTasks = new List<string> { "Код", "Тест", "Код" };
@@ -84,3 +84,80 @@ bool RemoveTaskAtSafe(List<string> tasks, int index)
 // {
 //     Console.WriteLine("Задача не найдена");
 // }
+
+Console.Write("Сколько задач добавить сначала: ");
+int count = Convert.ToInt32(Console.ReadLine());
+
+List<string> tasks = new List<string>();
+
+for (int i = 0; i < count; i++)
+{
+    Console.Write($"Задача {i + 1}: ");
+    string title = Console.ReadLine() ?? "";
+    tasks.Add(title);
+}
+
+
+PrintTasks(tasks);
+
+Console.Write("Новая задача для добавления в конец: ");
+string add = Console.ReadLine() ?? "";
+tasks.Add(add);
+Console.WriteLine("Задача добавлена");
+
+Console.Write("Задача для вставки: ");
+string newAdd = Console.ReadLine() ?? "";
+
+Console.Write("Индекс вставки: ");
+int newIndex = Convert.ToInt32(Console.ReadLine());
+
+if (!InsertTaskSafe(tasks, newIndex, newAdd))
+{
+    Console.WriteLine("Недопустимый индекс вставки");
+}
+else
+{
+    Console.WriteLine("Задача вставлена");
+}
+
+Console.Write("Название задачи для удаления: ");
+string zadaca = Console.ReadLine() ?? "";
+
+if (tasks.Remove(zadaca))
+{
+    System.Console.WriteLine("Первое совпадение удалено ");
+}
+else
+{
+    System.Console.WriteLine("Задача не найдена");
+}
+
+Console.Write("Назовите индекс задачи для удаления: ");
+int newIndexx = Convert.ToInt32(Console.ReadLine());
+
+if (RemoveTaskAtSafe(tasks, newIndexx))
+{
+    System.Console.WriteLine("Задача по индексу удалена");
+}
+else
+{
+    System.Console.WriteLine("Недопустимый индекс удаления");
+}
+
+Console.Write("Назовите название задачи для поиска: ");
+string poisk = Console.ReadLine() ?? "";
+int found = tasks.IndexOf(poisk);
+
+if (found >= 0)
+{
+    System.Console.WriteLine($"Первый индекс: {found}");
+}
+else
+{
+    System.Console.WriteLine("Задача не найдена");
+}
+
+Console.WriteLine(">>> Итоговый список дел <<<");
+Console.WriteLine();
+Console.WriteLine($"Количество задач: {tasks.Count}");
+PrintTasks(tasks);
