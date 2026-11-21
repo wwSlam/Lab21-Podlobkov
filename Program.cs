@@ -161,3 +161,28 @@ Console.WriteLine(">>> Итоговый список дел <<<");
 Console.WriteLine();
 Console.WriteLine($"Количество задач: {tasks.Count}");
 PrintTasks(tasks);
+
+
+Console.WriteLine();
+Console.WriteLine("Вариант 1");
+
+Console.Write("Введите название задачи для поиска: ");
+string searchTitle = Console.ReadLine() ?? "";
+
+int matches = CountTask(tasks, searchTitle);
+
+Console.WriteLine($"Количество совпадений: {matches}");
+
+int CountTask(List<string> tasks, string title)
+{
+    int count = 0;
+
+    foreach (string task in tasks)
+    {
+        if (task == title)
+        {
+            count++;
+        }
+    }
+    return count;
+}
